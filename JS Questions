@@ -1,0 +1,174 @@
+0. What is javascript? What are its features? Why use it?
+->
+
+1. What's the difference between declaration and definition?
+-> Declarations makes the compiler aware of the existence and type of an entity,
+    while definitions provide the actual implementation and memory allocation for that entity.
+
+2. Explain the difference between var, let and const keywords in js.
+-> scope -> declaration & assignment -> hoisting
+-> detail refer /JSByExample/1.var_let_const.js
+
+
+3. What is a temporal dead zone?
+-> Variables are not accessible before the line we declare (initialize) them. This is called the "temporal dead zone".
+
+4. How many phases occur during execution of script?
+-> There are two phases
+    1. Creation phase (Scope, Hoisting, `this`)
+        - The engine sets up the scope chain, which defines how variable lookups are performed.
+        - Variable and Functions declarations are hoisted to the top of their respective scope.
+        - The `this` keyword is determined and set based on the context of execution.
+    2. Execution phase
+        - The code is executed line by line, and assignments, function calls, and other statements are performed.
+
+-> The process of creation and execution phases is performed each time a function is called, as well.
+-> When a function is called, a new execution context is created for that function, and the creation and execution phases are applied within that context.
+
+5. What is hoisting? Explain variable and function hoisting.
+-> Hoisting means that the declarations are processed and made available before any code execution takes place.
+-> Variable hoisting refers to the behavior of hoisting variable declarations to the top of their scope.
+-> While function hoisting refers to the behavior of hoisting entire function declarations along with their definitions to the top of their scope, allowing them to be called before their actual declarations in the code.
+
+6. What is the role of JS Engine.
+-> Parsing (Abstract Syntax Tree) > Compilation > Execution > Optimization
+
+7. What is `this` in js?
+-> `this` is a special keyword that refers to the current execution context or the object that a function is called on.
+-> The value of `this` is determined dynamically at runtime, depending on how a function is invoked.
+-> Global Context, Object Invocation, Constructor Invocation, Explicit Binding etc
+-> refer /JSByExample/3.this.js
+
+8. Explain Event-Loop in js.
+-> https://dev.to/lydiahallie/javascript-visualized-event-loop-3dif
+
+9. Explain prototype property in js.
+-> Every object in JavaScript has a `prototype` property, which refers to another object (usually referred to as the "prototype object").
+-> This prototype object is used as a fallback mechanism for properties and methods that are not directly found in the object itself.
+-> refer /JSByExample/4.prototype.js
+
+10. What are generator functions and how does it work?
+-> Generator functions are a unique type of function that allow you to create iterators that can yield multiple values one at a time,
+    instead of returning a single value like regular functions.
+-> refer /JSByExample/5.generator_fn.js
+
+11. What are the different types of control statements in JS?
+-> refer /JSByExample/2.control_statements.js
+
+12. What is the iterator protocol? What are iterator objects and enumerable properties?
+-> The Iterator Protocol consists of two main components:
+    Iterable Object: An object that implements the Symbol.iterator method. When this method is called, it should return an iterator object.
+    Iterator Object: An object that implements the next() method. When the next() method is called on the iterator object, it should return an object with two properties: value (the current value in the iteration) and done (a boolean indicating whether the iteration is complete or not).
+->  Enumerable properties are the keys that allow you to access the values, but they are specifically those keys that are visible and accessible during iterations or when you're working with methods that deal with object properties.
+
+13. What is pass by reference and pass by value in js?
+-> In JavaScript, the concepts of "pass by reference" and "pass by value" refer to how data is transferred when passing variables to functions.
+-> refer /JSByExample/6.passByRefandByVal.js
+
+14. Module import,export(ES6) vs module.exports,require(Common JS) `default` keyword
+-> Module import,export in JavaScript refers to the process of including functionality from one module (a separate JavaScript file) into another module
+    or script. Modules help organize code into separate files, making it easier to manage, reuse, and maintain code.
+-> In Node.js, you can use the CommonJS module system, which involves using `require` to import modules and `module.exports` (or exports) to define what a module exports.
+-> the `default` keyword is not directly supported in the CommonJS module system (require/module.exports)
+-> the `default` keyword while exporting module allows you to provide a primary export from a module that can be imported without curly braces,
+    making your code more concise and readable when dealing with a main module export.
+
+15. Promise in js
+
+16. pure vs impure functions
+->  Pure Functions:
+    - Always produce the same output for the same input.
+    - Have no side effects; they don't modify external state or variables.
+    - Are deterministic and exhibit referential transparency.
+    - Easy to reason about, test, and compose.
+    - Promote predictability and maintainability in code.
+
+->  Impure Functions:
+    - Can produce different outputs for the same input.
+    - Have side effects; they can modify external state or variables.
+    - Lack determinism and referential transparency.
+    - Useful for interactions with the outside world, like I/O operations.
+    - Need careful management to isolate side effects and maintain code clarity.
+
+17. Implement local cache / memoized function
+-> Memoization is a technique where you store the results of expensive function calls and return the cached result when the same inputs occur again.
+   With memoization, we can cache the results of a function in order to speed up its execution.
+        const add = () => {
+            const cache = {};
+            return num => {
+                if (num in cache) {
+                    return `From cache! ${cache[num]}`;
+                } else {
+                    const result = num + 10;
+                    cache[num] = result;
+                    return `Calculated! ${result}`;
+                }
+            };
+        };
+
+        const addFunction = add();
+        console.log(addFunction(10));
+        console.log(addFunction(10));
+        console.log(addFunction(5 * 2));
+
+18. Regular Fn vs Arrow Fn. 
+-> Regular Functions:
+    - Have their own dynamic `this` context, determined when the function is called.
+    - Access to the `arguments` object to access all arguments passed to the function.
+    - Suitable for most scenarios, especially when `this` context needs to be dynamic or when working with the `arguments` object.
+
+-> Arrow Functions:
+    - Capture the surrounding context's `this` value (lexical scoping).
+    - Do not have their own `arguments` object; use rest parameters (`...args`) instead.
+    - Concise syntax with implicit return for one-line expressions.
+    - Useful for maintaining consistent `this` context and for short function expressions.
+
+19. Automatic Semicolon Insertion.
+->  JavaScript automatically adds semicolons in certain cases to separate statements if they're missing. Except in {} & if/else
+
+20. Async Await vs Promise .then difference
+
+21. How Js interprets statements 
+-> ; at each line end except for if/else statements! Automatic Semicolon Insertion
+-> JavaScript unboxes statements interprets from `[` to `]`
+
+22. Example 116, 124, 143, 144
+
+23. Optional chaining operator ?.
+-> It helps avoid "Cannot read property 'x' of undefined" or similar errors.
+-> object?.property , object?.property.method()
+
+24. Destructuring syntax
+
+
+25. Proxy Object
+-> A Proxy object in JavaScript is a powerful feature that allows you to intercept and customize operations performed on objects,
+    such as property access, assignment, function invocation, and more.
+-> It essentially acts as a middleman between code and an object, allowing you to control and modify the behavior of interactions with that object.
+
+26. Array fn that modify original array?
+-> push, pop, shift, unshift, sort, reverse etc.
+
+27. How does JavaScript handle memory management for primitive types vs. reference types?
+-> refer Q.3 in More Js Questions
+
+28. What are the differences between CommonJS and ES6 (ESM) module systems?
+-> refer /JSByExample/7.modules.js
+
+29. Types of functions in js
+
+30. Explain immutability in functional programming with example
+-> refer /JSByExample/8.immutability.js
+31. Closures: You can create private variables and functions using closures. A closure allows inner functions to access variables from their containing outer function even after the outer function has completed execution.
+
+Points to remember:
+
+~ Functions are objects, which is why two functions are never strictly equal, even if they are identical: they have a reference to a different spot in memory.
+~ Cannot directly loop on object. Use Object.keys , Object.values, Object.entries to loop
+~ Use dot notation for straightforward and known property access, and use bracket notation when dealing with dynamic, non-standard, or variable-based property names.
+
+Further Reading:
+~ Async Iterators
+~ Proxy and Reflect APIs
+~ Lazy Loading
+~ Design Patterns: Singleton, factory, module, observer, etc.

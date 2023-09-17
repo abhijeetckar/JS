@@ -1,0 +1,452 @@
+1. Discuss the concept of "NaN" (Not-a-Number) in JavaScript. How can you reliably check if a value is NaN?
+
+   - Answer: NaN represents a value in JavaScript that is "Not-a-Number" and is typically the result of invalid mathematical operations.
+   To check if a value is NaN, you can use the `isNaN()` function, which returns true if the argument is NaN. For example:
+   
+     ```javascript
+     const value = 10 / 'abc';
+     const isNanValue = isNaN(value); // isNanValue will be true
+     ```
+
+2. How does JavaScript's nullish coalescing operator (??) differ from the || operator when dealing with default values?
+
+   - Answer: The nullish coalescing operator (`??`) and the logical OR operator (`||`) are used to provide default values in JavaScript,
+   but they behave differently with certain falsy values.
+   The `??` operator checks only for `null` or `undefined` and provides a default value if the left operand is either of these.
+   The `||` operator, on the other hand, checks for any falsy value and provides the default value if the left operand is falsy
+   (including `null`, `undefined`, `0`, `false`, `''`, etc.). For example:
+
+     ```javascript
+     const a = null;
+     const b = 'Default';
+
+     const result1 = a ?? b; // result1 is 'Default'
+     const result2 = a || b; // result2 is 'Default'
+
+     const c = 0;
+     const d = 'Default';
+
+     const result3 = c ?? d; // result3 is 0
+     const result4 = c || d; // result4 is 'Default'
+     ```
+
+3. How does JavaScript handle memory management for primitive types vs. reference types?
+
+   - Answer: JavaScript manages memory differently for primitive types (e.g., numbers, strings, booleans) and reference types (e.g., objects, arrays).
+   Primitive types are stored directly in memory, and their values are copied when assigned to variables or passed as function arguments.
+   Reference types, on the other hand, store references to memory locations, and multiple variables can point to the same object in memory.
+   Memory for reference types is automatically managed through garbage collection when there are no references to an object,
+   while primitive types do not require explicit memory management.
+
+4. Can you define and give an example of a recursive function in JavaScript?
+
+   - Answer: A recursive function is a function that calls itself to solve a problem by breaking it down into smaller, similar subproblems.
+   Here's an example of a recursive function in JavaScript to calculate the factorial of a number:
+
+     ```javascript
+     function factorial(n) {
+       if (n === 0) {
+         return 1;
+       } else {
+         return n * factorial(n - 1);
+       }
+     }
+
+     const result = factorial(5); // result is 120
+     ```
+
+5. What is the difference between a function declaration and a function expression?
+
+   - Answer: In JavaScript, a function declaration is defined using the `function` keyword followed by a name and a block of code.
+   It is hoisted, meaning it can be called before it's defined in the code.
+   In contrast, a function expression defines a function as part of an expression and can be anonymous.
+   It is not hoisted, so it must be defined before it's used. For example:
+
+     ```javascript
+     // Function Declaration
+     function add(a, b) {
+       return a + b;
+     }
+
+     // Function Expression
+     const subtract = function(a, b) {
+       return a - b;
+     };
+     ```
+
+6. Explain the terms "function scope" and "lexical scope" in relation to JavaScript functions.
+
+   - Answer: Function scope refers to the scope or visibility of variables declared within a function.
+   These variables are only accessible within that function.
+   Lexical scope, on the other hand, refers to the scope of variables determined by their physical location in the code.
+   In JavaScript, variables have lexical scope, meaning their accessibility is based on where they are defined in the code,
+   regardless of whether they are within a function or not. This enables closures to capture and remember variables from their surrounding lexical scope.
+
+7. What is "currying," and how can it be implemented in JavaScript?
+
+   - Answer: Currying is a functional programming technique where a function that takes multiple arguments
+   is transformed into a series of functions that each take one argument.
+   It can be implemented in JavaScript using closures and function chaining. Here's an example:
+
+     ```javascript
+     function curry(fn) {
+       return function curried(...args) {
+         if (args.length >= fn.length) {
+           return fn(...args);
+         } else {
+           return function(...moreArgs) {
+             return curried(...args, ...moreArgs);
+           };
+         }
+       };
+     }
+
+     function add(a, b, c) {
+       return a + b + c;
+     }
+
+     const curriedAdd = curry(add);
+     const add5 = curriedAdd(5);
+     const result = add5(10)(15); // result is 30
+     ```
+
+8. Describe the concept of "monads" in the context of functional programming and how they relate to functions.
+
+   - Answer: Monads are a design pattern used in functional programming to manage side effects, such as I/O operations or asynchronous code,
+   in a pure and composable way. They are essentially wrappers around values that provide a set of operations to work with those values.
+   In JavaScript, Promises can be considered a form of monad, as they encapsulate asynchronous operations and provide methods like `then()` for composition.
+   Monads ensure predictable and controlled handling of side effects within a functional programming paradigm.
+
+9. How does "tail call optimization" impact recursive function performance in JavaScript?
+
+   - Answer: Tail call optimization (TCO) is an optimization technique in which the JavaScript engine reuses the current function's stack frame
+   when a function call is the last action in another function.
+   This optimization can significantly improve the performance of recursive functions by preventing stack overflow errors.
+   It allows recursive functions to have constant memory usage, making them more efficient.
+   However, not all JavaScript engines support TCO, so its availability may vary.
+
+10. Explain the term "tail call optimization" and how it relates to recursive functions that involve arrays.
+
+    - Answer: Tail call optimization (TCO) is an optimization technique in which the JavaScript engine optimizes recursive functions
+    by reusing the current function's stack frame when the recursive call is the last action before returning a value.
+    In the context of recursive functions that involve arrays, TCO can be particularly beneficial.
+    For example, in a recursive function to calculate the sum of an array of numbers, TCO ensures that the function doesn't create a new stack frame for each element in the array, which can lead to stack overflow errors for large arrays. Instead, TCO allows the function to process each element in a loop-like fashion, maintaining constant memory usage.
+
+11. Discuss the concept of "first-class functions" and provide examples of their applications.
+
+    - Answer: First-class functions in JavaScript refer to functions that are treated as first-class citizens,
+    which means they can be assigned to variables, passed as arguments to other functions, returned from other functions, and stored in data structures.
+    This concept allows for powerful functional programming techniques. Examples of applications include: 
+
+    Passing functions as arguments to higher-order functions like `map`, `filter`, and `reduce`.
+      - Returning functions from other functions to create closures.
+      - Assigning functions to variables for dynamic behavior.
+      - Creating event handlers by passing functions to event listeners.
+      - Implementing callbacks for asynchronous operations.
+
+12. What potential issues should you be aware of when working with closures?
+
+    - Answer: Closures in JavaScript can be powerful but come with potential issues:
+
+      - Memory leaks: Closures can keep references to outer variables, preventing them from being garbage collected if not managed properly.
+      - Variable shadowing: Variables with the same name in inner and outer scopes can lead to unexpected behavior.
+      - Performance concerns: Creating many closures can impact performance due to increased memory usage.
+      - Difficult debugging: Closures can make debugging complex, as the scope chain may not be immediately apparent.
+
+13. What are "array-like" objects, and how can you convert them into proper arrays?
+
+    - Answer: Array-like objects are objects that have properties like arrays (e.g., numeric indices) but are not actual arrays.
+    Examples include the `arguments` object or the `NodeList` returned by `querySelectorAll`.
+    To convert them into proper arrays, you can use techniques like:
+
+      - Using the `Array.from()` method:
+        ```javascript
+        const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+        const newArray = Array.from(arrayLike);
+        ```
+
+      - Using the spread operator:
+        ```javascript
+        const arrayLike = { 0: 'a', 1: 'b', length: 2 };
+        const newArray = [...arrayLike];
+        ```
+
+14. What are ES6 symbols, and how can they be used as object property keys?
+
+    - Answer: ES6 symbols are a primitive data type introduced in ECMAScript 2015 (ES6).
+    They are unique and immutable values that can be used as object property keys.
+    Symbols are often used to create "private" properties or to avoid naming conflicts. To use symbols as object property keys:
+
+      ```javascript
+      const uniqueSymbol = Symbol('description');
+      const obj = {
+        [uniqueSymbol]: 'This is a unique symbol key'
+      };
+      console.log(obj[uniqueSymbol]); // 'This is a unique symbol key'
+      ```
+
+15. How do you create a timeout for a Promise, meaning it should reject if not resolved within a certain time frame?
+
+    - Answer: You can create a timeout for a Promise using the `Promise.race()` method, which takes an array of Promises and resolves or rejects as soon as one of the Promises in the array settles (either resolves or rejects). Here's an example:
+
+      ```javascript
+      function timeout(ms) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            reject(new Error('Timeout'));
+          }, ms);
+        });
+      }
+
+      function fetchData() {
+        return new Promise((resolve, reject) => {
+          // Simulate fetching data
+          setTimeout(() => {
+            resolve('Data fetched successfully');
+          }, 2000);
+        });
+      }
+
+      Promise.race([fetchData(), timeout(1500)])
+        .then(result => {
+          console.log(result); // 'Data fetched successfully'
+        })
+        .catch(error => {
+          console.error(error); // 'Timeout'
+        });
+      ```
+
+16. How can you create a custom Promise-based function that mimics the behavior of Array.map() but works asynchronously? Provide an example.
+
+    - Answer: You can create a custom asynchronous `map` function using Promises and `Promise.all()`. Here's an example:
+
+      ```javascript
+      async function asyncMap(array, asyncCallback) {
+        const mappedResults = await Promise.all(array.map(asyncCallback));
+        return mappedResults;
+      }
+
+      async function doubleAsync(value) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve(value * 2);
+          }, 1000);
+        });
+      }
+
+      const inputArray = [1, 2, 3, 4];
+
+      asyncMap(inputArray, doubleAsync)
+        .then(results => {
+          console.log(results); // [2, 4, 6, 8]
+        });
+      ```
+
+17. If you want to execute multiple asynchronous operations concurrently using await,
+but some of them should be limited to a specific concurrency level (e.g., making API requests with a maximum of 3 at a time), how could you achieve this?
+
+    - Answer: You can achieve this using a combination of `async/await` and a concurrency control mechanism like a semaphore.
+    Here's an example using a semaphore to limit concurrency to 3 asynchronous operations at a time:
+
+      ```javascript
+      async function fetchData(url) {
+        // Simulate fetching data from the URL
+        console.log(`Fetching data from ${url}`);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        console.log(`Data fetched from ${url}`);
+      }
+
+      async function executeConcurrentOperations(urls, concurrencyLimit) {
+        const semaphore = Array(concurrencyLimit).fill(null);
+
+        const executeOperation = async (url) => {
+          const semaphoreSlot = semaphore.pop();
+          if (!semaphoreSlot) return; // All slots are occupied.
+          
+          try {
+            await fetchData(url);
+          } finally {
+            semaphore.push(semaphoreSlot);
+          }
+        };
+
+        const promises = urls.map(url => executeOperation(url));
+        await Promise.all(promises);
+      }
+
+      const urls = ['url1', 'url2', 'url3', 'url4', 'url5', 'url6'];
+      executeConcurrentOperations(urls, 3);
+      ```
+
+18. Generators can also be used for asynchronous programming. How can you use generators to simplify asynchronous code using the concept of "co-routines"?
+
+    - Answer: Generators can be used to create co-routines, which are functions that can pause and resume their execution. 
+    his allows for more readable asynchronous code. Here's an example:
+
+      ```javascript
+      function* fetchData() {
+        try {
+          const data1 = yield fetchDataFromAPI('url1');
+          console.log(data1);
+          const data2 = yield fetchDataFromAPI('url2');
+          console.log(data2);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      function fetchDataFromAPI(url) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve(`Data from ${url}`);
+          }, 1000);
+        });
+      }
+
+      function runGenerator(generator) {
+        const iterator = generator();
+
+        function iterate(iteration) {
+          if (iteration.done) {
+            return Promise.resolve(iteration.value);
+          }
+          return Promise.resolve(iteration.value)
+            .then(value => iterate(iterator.next(value)))
+            .catch(error => iterate(iterator.throw(error)));
+        }
+
+        return iterate(iterator.next());
+      }
+
+      runGenerator(fetchData);
+      ```
+
+19. In what scenarios would you use generators for data streaming, and how would you implement it?
+
+    - Answer: Generators can be used for data streaming in scenarios where you need to process or generate a large amount of data lazily, one piece at a time. For example, when reading a large file or streaming data over a network. Here's a simplified implementation:
+
+      ```javascript
+      function* dataStream() {
+        for (let i = 0; i < 10; i++) {
+          yield i;
+        }
+      }
+
+      const stream = dataStream();
+
+      function processData(value) {
+        console.log(`Received: ${value}`);
+        // Process the data here
+      }
+
+      function startStreaming() {
+        const { value, done } = stream.next();
+        if (!done) {
+          processData(value);
+          setTimeout(startStreaming, 1000); // Simulate asynchronous data streaming
+        }
+      }
+
+      startStreaming();
+      ```
+
+20. Explain the concept of "thunks" in the context of generators. How do they simplify asynchronous code?
+
+    - Answer: In the context of generators, thunks are functions that encapsulate asynchronous operations and return a generator-friendly interface.
+    Thunks are used to simplify asynchronous code by abstracting away the complexities of managing asynchronous flows.
+    They allow you to write asynchronous code in a more linear, synchronous-looking style. Here's an example:
+
+      ```javascript
+      function fetchData(url) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve(`Data from ${url}`);
+          }, 1000);
+        });
+      }
+
+      function* myGenerator() {
+        const data1 = yield fetchData('url1');
+        console.log(data1);
+        const data2 = yield fetchData('url2');
+        console.log(data2);
+      }
+
+      function thunkify(fn) {
+        return function(...args) {
+          return function(callback) {
+            fn(...args)
+              .then(result => callback(null, result))
+              .catch(error => callback(error, null));
+          };
+        };
+      }
+
+      const myThunkGenerator = function* () {
+        const thunk1 = thunkify(fetchData)('url1');
+        const data1 = yield thunk1;
+
+        console.log(data1);
+
+        const thunk2 = thunkify(fetchData)('url2');
+        const data2 = yield thunk2;
+
+        console.log(data2);
+      };
+
+      // Execute the generator
+      function runGenerator(generator) {
+        const iterator = generator();
+        function iterate(iteration) {
+          if (iteration.done) return Promise.resolve(iteration.value);
+          return Promise.resolve(iteration.value).then(value =>
+            iterate(iterator.next(value))
+          );
+        }
+        return iterate(iterator.next());
+      }
+
+      runGenerator(myThunkGenerator);
+      ```
+
+21. How can you achieve cooperative multitasking using generators to pause and resume execution?
+
+    - Answer: Cooperative multitasking can be achieved using generators by pausing and resuming execution explicitly.
+    You can yield control back to a scheduler function that decides when to resume the generator. Here's an example:
+
+      ```javascript
+      function* task1() {
+        console.log('Task 1 - Step 1');
+        yield;
+        console.log('Task 1 - Step 2');
+        yield;
+        console.log('Task 1 - Step 3');
+      }
+
+      function* task2() {
+        console.log('Task 2 - Step 1');
+        yield;
+        console.log('Task 2 - Step 2');
+      }
+
+      function cooperativeScheduler(tasks) {
+        const iterators = tasks.map(task => task());
+
+        function schedule() {
+          for (const iterator of iterators) {
+            const { done } = iterator.next();
+            if (!done) {
+              setTimeout(schedule, 0);
+              return;
+            }
+          }
+        }
+
+        schedule();
+      }
+
+      cooperativeScheduler([task1, task2]);
+      ```
+
+   In this example, `cooperativeScheduler` schedules the execution of tasks using generators.
+   Each task yields control, allowing other tasks to execute in a cooperative manner.
