@@ -1,0 +1,71 @@
+1. What type of language is JavaScript?
+a) dynamically compiled type
+b) INTERPRETED LANGUAGE
+c) functional language
+d) weakly typed language
+
+2. What does the term "declaration" refer to?
+a) initializing a variable with a value
+b) allocating memory for a variable
+c) INTRODUCING THE EXISTENCE OF A VARIABLE WITHOUT DEFINING ITS VALUE.
+d) assigning a value to a variable
+
+3. Which of the following is a consequence of the Temporal Dead Zone ?
+a) Variables declared with var, let and const are inaccessible before their declaration.
+b) VARIABLES DECLARED WITH LET AND CONST CANNOT BE ACCESSED OR INITIALIZED BEFORE THEIR DECLARATION.
+c) Functions declared within a block are hoisted above variable declarations.
+d) Variables declared with let and const are initialized to undefined in the temporal dead zone.
+
+4. What is the key difference between parallelism and concurrency?
+a) parallelism primarily focuses on managing tasks, while concurrency aims to execute tasks simultaneously.
+b) parallelism can only occur on a multi-core processor, while concurrency can occur on both single-core and multi-core processors.
+c) PARALLELISM IMPROVES THE SPEED OF TASK EXECUTION, WHEREAS CONCURRENCY IMPROVES THE EXECUTION OF A PROGRAM BY DEALING WITH MULTIPLE TASKS.
+d) parallelism involves executing multiple tasks simultaneously, while concurrency involves managing the execution of tasks.
+
+5. Which of the following data structures is NOT iterable in JavaScript?
+a) array
+b) OBJECT
+c) map
+d) set
+
+6. Which of the following is a use case for closures?
+a) ENCAPSULATING PRIVATE DATA WITHIN A FUNCTION.
+b) creating lexical scopes within a function.
+c) managing scope and preventing variable pollution.
+d) implementing partial application and currying.
+
+7. What is the purpose of process nextTick function in Node.js?
+a) to execute a callback at the next iteration of the event loop
+b) to execute a callback asynchronously
+c) TO EXECUTE A CALLBACK AT THE START OF NEXT ITERATION OF EVENT LOOP 
+d) to execute a callback at the end of current iteration of event loop 
+
+8. What is the primary purpose of Worker Threads in Node.js?
+a) to handle blocking i/o operations asynchronously
+b) TO EXECUTE JAVASCRIPT CODE IN PARALLEL WITH THE MAIN EVENT LOOP
+c) to manage multiple node.js processes for load balancing
+d) to optimize memory usage in node.js applications
+
+9. What is the behavior when an asynchronous function is called within a for loop in Node application?
+a) each iteration of the loop returns the result and moves to next iteration.
+B) THE ASYNC FUNCTION EXECUTES IMMEDIATELY WITHOUT WAITING FOR THE LOOP TO COMPLETE.
+c) the loop completes all iterations before any async function is executed.
+d) the async function executes in parallel with the loop iterations, but the order of execution is not guaranteed.
+
+10. Which of the following best describes a Promise in JavaScript?
+a) a guarantee that a function will return a result without stopping the execution of code.
+b) AN OBJECT REPRESENTING THE STATE OF AN ASYNCHRONOUS OPERATION.
+c) a callback function passed to an asynchronous operation which will return a result in future.
+d) a wrapper around asynchronous code to make execute in background.
+
+11. What are events in Node.js?
+a) functions that execute when a certain condition is met.
+b) OBJECTS REPRESENTING USER ACTIONS.
+c) built-in methods for handling asynchronous tasks.
+d) special functions used to trigger code execution.
+
+12. What is one advantage of NoSQL databases over SQL databases?
+a) strong acid transactions
+b) strict schema enforcement
+c) HORIZONTAL SCALABILITY
+d) joins across tables
